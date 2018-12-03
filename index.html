@@ -19,9 +19,9 @@
     <div class="page-header">
 
         <!-- Title and Name -->
-        <h1>Reproducability Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
+        <h1>ICLR Reproducibility Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
         <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel Cabrera, Varun Gupta, Will Epperson</strong></span><br>
-        <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Class Project</span><br>
+        <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Final Project</span><br>
         <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
     </div>
 
@@ -42,40 +42,76 @@
             <br>
 
             <!-- figure -->
-            <h2>TODO: Teaser figure</h2>
-            A figure that conveys the main idea behind the project or the main application being addressed. (This one is from <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks">AlexNet</a>.)
+            <h2>Generative Adversarial Privacy and Fairness (GAPF) Framework</h2>
+            insert caption. (Source: <a href="https://openreview.net/pdf?id=H1xAH2RqK7">ICLR19</a>)
             <br><br>
-            <!-- Main Illustrative Figure -->
             <div style="text-align: center;">
-            <img style="height: 200px;" alt="" src="images/alexnet.png">
+            <!-- Main Illustrative Figure -->
+            <img style="height: 200px;" alt="" src="images/gapf.png">
             </div>
 
-            <br><br>
-            <!-- Introduction -->
-            <h2>Introduction / Background / Motivation</h2>
-            What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.
-            <ul>
-            <li> fairness is important (refrence previous work) </li>
-            <li> this paper tries to learn task agnostic data Representation that preserves size and shape of data </li>
-            <li> How is it done today, and what are the limits of current practice? </li>
-            <li> Who cares? If you are successful, what difference will it make? </li>
+            <br>
 
-            </ul>
-
-            <br><br>
             <!-- Approach -->
             <h2>Approach</h2>
             <h4>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h4>
 
-            We reproduced the Generative Adversarial Privacy and Fairness (GAPF)
+            <h5>Overview of Model</h5>
+
+            <p>We reproduced the Generative Adversarial Privacy and Fairness (GAPF)
              mechanism outlined in the paper. The mechanism is a generative adversarial
              neural network in which the generator attempts to learn a representation
              of the data from which the adversary is not able to discern the sensitive attribute.
-             The sensitive attribute for the HAR dataset used is a binary gender variable.
+             The sensitive attribute for the HAR dataset used is the attribute representing
+             the subject's identity.
              The approach in the paper is novel because the GAPF framework learns a representation
-             that is agnostic of the downstream predictive task. That is, learning the
-             representation does not depend on
+             that is agnostic of the downstream predictive task. That is, the generator is able
+             to learn a representation of the data that is useful for any number of
+             tasks one might want to use the data for. This is a key difference between
+             the GAPF framework and previously introduced decorrelating mechanisms.</p>
 
+             <h5>HAR Dataset</h5>
+             <p>The HAR dataset used consists of smartphone motion sensor data with 561
+             features collected from 30 subjects. The target variable represents
+             one of six activities (walking, walking up stairs, walking down stairs,
+             sitting, standing, laying) that each subject is performing. The motion sensor
+             features represent the public variables and the subject's identity represents
+             the sensitive variable.</p>
+
+             <h5>Architecture</h5>
+             <p>The decorrelator is modeled using a four-layer fully connected feedforward
+             neural network. The decorrleator expects an input of
+             661 features, which is the original data concatenated with 100 features of Gaussian noise.
+             The network's three hidden layers consist of 512 neurons with leaky ReLU activations.
+             The output layer has 561 neurons, used to generate processed data
+             with the same dimensionality as the original.
+
+             The adversary is a five-layer feedforward neural network. The adversary expects an
+             input of 561 features, the dimensionality of the original data. The four hidden
+             layer have 512, 512, 265, and 128 neurons, respectively, each with leaky
+             ReLU activations. The output layer has 30 layers which output the adversary's
+             belief of the subject's identity.
+
+             We used cross-entropy loss with an L2 regularizer. The regularizer was
+             used to impose the distortion constraint on the generator to limit the
+             amount the processed data could differ from the orignial. The distortion
+             was captured by a parameter set in the model and the regularizer only penalized
+             values that had an L2 norm exceeding this value.</p>
+
+             <h5>Our Implementation</h5>
+             <p>We use the same model architecture as the paper, described above. However,
+             we did implement the model ourselves and used PyTorch, whereas the original paper
+             used TensorFlow.</p>
+
+
+             <ui>
+               <li>
+                 hyperparameters
+               </li>
+               <li>
+                 overfitting
+               </li>
+            </ui>
 
 
             <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
@@ -86,21 +122,53 @@
             <h2>Experiments and Results</h2>
             <h4>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h4>
 
-            We focused our evaluation on two areas: 1) the utility of the learned representation 
+            <h5>Experiments</h5>
+            <p>We ran multiple experiments with different values for the distortion parameter.
+            As described above, the distortion parameter captures how much the learned
+            representation is allowed to differ from the original data. Higher distortion
+            values mean that the generator is able to modify the data more, which
+            we expect would lead to lower classification accuracy for both the target
+            and sensitive variables. We ran experiments for distortion values
+            D between 0 and 8.</p>
 
-            <br><br>
+            <div style="text-align: center;">
+            <img style="height: 300px;" alt="" src="images/results.png">
+            </div>
+
+            <h5>Results</h5>
+
+            <p>We focused our evaluation on two areas: 1) the utility of the learned representation
+            and 2) the obfuscation of the sensitive variable.
+
+            To measure the utility of the learned representation we compared the predictive power of a neural network
+            in classifying the activity attribute on the original data and the
+            learned representation. The classifier used was a neural network with
+            the same architecture as the adversary described above.
+
+            To measure the generator's effectiveness in obscuring the sensitive
+            variable, we compared the adversary's gender prediction accuracy between the
+            original and processed data.
+
+            Finally, we also show the tradeoff between classification accuracy of
+            target and sensitive variables for different values of distortion.</p>
 
             <!-- Main Results Figure -->
             <div style="text-align: center;">
             <img style="height: 300px;" alt="" src="images/results.png">
             </div>
-            <br><br>
+            <br>
+
+            <h5>Discussion</h5>
+            about similarity of our results to the paper's
+            <br>
+
     </div>
 
     <div class="footer">
         <hr>
         <footer>
           <p>© Alex Cabrera, Varun Gupta, Will Epperson </p>
+          <br>
         </footer>
     </div>
 
