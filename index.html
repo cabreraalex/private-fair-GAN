@@ -30,20 +30,50 @@
             <h2>Introduction/Background/Motivation</h2>
 
             <h4>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon</h4>
-            <p>In our project, we attempted to reproduce the work of a paper on OpenReview.net entitled <i><a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">Generative Adversarial Models for Learning Private and Fair Representations</a></i>. This paper explores using a GAN architecture to create a decorrelation mechanism that hides a sensative variable while still preserving the utility of the original data. In our work, we replicated the architecture described in the paper using PyTorch. We focused on reproducing the results for the UCI Human Activity Recognition (HAR) dataset.</p>
+            <p>In our project, we attempted to reproduce the work of a paper on OpenReview.net entitled <i><a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">Generative Adversarial Models for Learning Private and Fair Representations</a></i>,
+              which is currently under double-blind review for ICLR19.
+              This paper explores using a generative adversarial architecture to create a decorrelation mechanism that obfuscates a sensitive variable while still preserving the utility of the original data.
+              In our work, we replicated the architecture described in the paper and focus on reproducing the results for the <a href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones" target="_blank">UCI Human Activity Recognition (HAR) dataset.</a></p>
             <br>
 
             <h4>How is it done today, and what are the limits of current practice?</h4>
-            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches <b>TODO: Cite or talk about previous decorrelation strats</b>. In regards to this specific paper is under review on OpenReview.com for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
+            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches <b>TODO: Cite or talk about previous decorrelation strats</b>. In regards to this specific paper, since it is under double-blind review for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
             <br>
 
             <h4>Who cares? If you are successful, what difference will it make?</h4>
-            <p>There is a growing conversation around issues in machine learning regarding privacy and fairness. Models can easily encode bias and treat different groups disparately, while outputs of some models can give away the identity of certain instances. By creating a robust decorrelation mechanism that preserves the usefullness of a dataset, we can help improve these issues by allowing new innovations and techniques.</p>
+            <p>There is a growing conversation in machine learning communities
+                regarding privacy and fairness. Statistical models can easily
+                encode bias and treat different groups disparately, either as a result
+                of the original data or as a result of imbalances in the learning process.
+                Additionally, some models may unintentially reveal sensitive data
+                potentially publicizing an individual's personal information. As described
+                in the paper, much recent work in this area has focused on context-free
+                privacy and fairness which has proven to be very effective. However,
+                these guarantees do not leverage the data to obscure the sensitive
+                data in a particularly speciific way, thus often leading to significant
+                accuracy tradeoffs. In contrast, context-aware solutions tend to
+                create representations of data that preserve utility while making
+                it harder to learn the sensitive data. This work builds on recent developments
+                in generative models which have demonstrated effective in this task.
+                The main difference in this paper is that the decorrelating mechanism introduced
+                does not depend on fixing a particular target variable or learning task.
+                Previous work has focused on learning representations of data that maintain
+                utility with respect to a particular task. Creating a robust
+                decorrelation mechanism that is independent of a particular learning
+                task would be a very useful for this field.</p>
+                <p>In terms of our work, reproducibility of academic studies
+                  has also become increasingly important to machine learning
+                  communities. We are helping in this endeavor by recreating the
+                  results from this paper. Active engagement by students is one
+                  of the best ways to push academics and research to publish datasets
+                  and code and prioritize making their published work reproducible.
+                </p>
             <br>
 
             <!-- figure -->
             <h2>Generative Adversarial Privacy and Fairness (GAPF) Framework</h2>
-            insert caption. (Source: <a href="https://openreview.net/pdf?id=H1xAH2RqK7">ICLR19</a>)
+            Framework for the decorrelation mechanism. See appendix of paper
+            for additional information.
             <br><br>
             <div style="text-align: center;">
             <!-- Main Illustrative Figure -->
@@ -115,7 +145,14 @@
 
 
             <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
-            TODO
+            Although the original code from the paper is not provided, the paper
+            clearly states the outline of the implementation. We were able to
+            implement their formulation relatively easily. One issue we faced was
+            the order in which to train each network. TODO
+            Further, the paper did not identify their hyperparameter settings,
+            such as the regularization weight. We experimentally chose
+            values for these hyperparameters but discrepancy in these values may
+            cause our results to differ slightly from the paper.
 
             <br><br>
             <!-- Results -->
@@ -129,10 +166,10 @@
             values mean that the generator is able to modify the data more, which
             we expect would lead to lower classification accuracy for both the target
             and sensitive variables. We ran experiments for distortion values
-            D between 0 and 8.</p>
+            D ranging between 0 and 7.</p>
 
             <div style="text-align: center;">
-            <img style="height: 300px;" alt="" src="images/results.png">
+            <img style="height: 300px;" alt="" src="images/adversary_loss_d3.png">
             </div>
 
             <h5>Results</h5>
