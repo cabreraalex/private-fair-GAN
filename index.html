@@ -1,38 +1,99 @@
-<h2>Introduction, Background, and Motivation</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Deep Learning Class Project | Georgia Tech | Fall 2018: CS 4803 / 7643</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<h3>(5 points) What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</h3>
-<h3>(5 points) How is it done today, and what are the limits of current practice?</h3>
-<h3>(5 points) Who cares? If you are successful, what difference will it make?</h3>
+    <!-- Styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
 
-<h2>Approach</h2>
+<body>
+<div class="container">
+    <div class="page-header">
 
-<h3>(10 points) What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h3>
-<h3>(5 points) What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h3>
+        <!-- Title and Name -->
+        <h1>Reproducability Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
+        <span style="font-size: 20px; line-height: 1.5em;"><strong>Alex Cabrera, Varun Gupta, Will Epperson</strong></span><br>
+        <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Class Project</span><br>
+        <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
+    </div>
 
-<h2>Experiments and Results</h2>
-<h3>(10 points) How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h3>
+    <div class="body">
+            <!-- Goal -->
+            <h2>Abstract</h2>
+
+            In our project, we attempted to reproduct the work of a paper on OpenReview.net entitled <a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">"Generative Adversarial Models for Learning Private and Fair Representations"</a>. This paper explores using a GAN architecture to create a decorrelation mechanism that hides a sensative variable while still preserving the utility of the original data. In our work, we attempted to replicate the architectures described in the paper through PyTorch with mixed results. It is our opinion that the results in this paper <mark><b>(blah blah blah)</b></mark>.
+            <br><br>
+            <!-- figure -->
+            <h2>TODO: Teaser figure</h2>
+            A figure that conveys the main idea behind the project or the main application being addressed. (This one is from <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks">AlexNet</a>.)
+            <br><br>
+            <!-- Main Illustrative Figure -->
+            <div style="text-align: center;">
+            <img style="height: 200px;" alt="" src="images/alexnet.png">
+            </div>
+
+            <br><br>
+            <!-- Introduction -->
+            <h2>Introduction / Background / Motivation</h2>
+            What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.
+            <ul>
+            <li> fairness is important (refrence previous work) </li>
+            <li> this paper tries to learn task agnostic data Representation that preserves size and shape of data </li>
+            <li> How is it done today, and what are the limits of current practice? </li>
+            <li> Who cares? If you are successful, what difference will it make? </li>
+
+            </ul>
+
+            <br><br>
+            <!-- Approach -->
+            <h2>Approach</h2>
+            <h4>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h4>
 
 
-<br >
-<h2>Other rubric points</h2>
-<h3>In addition, 20 more points will be distributed based on presentation quality and Deep Learning knowledge:</h3>
+            differences include:
+
+            <ul>
+                <li>learning fairness Representations that are agnostic of downstream learning task </li>
+                <li> inject noise where necessary rather than generating completley new synthetic data </li>
 
 
-<h3>Other points throughout</h3>
+            </ul>
 
-<h3>(5 points) Appropriate use of visual aids. Are the ideas presented with appropriate illustration? Is the problem effectively visualized? Is the approach visualized appropriately? Are the results presented clearly; are the important differences illustrated? Every section and idea does not need a visual aid, but the most interesting and complex parts of the project should be illustrated.</h3>
+            <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
+            TODO
 
-<h3>(5 points) Overall clarity. Is the presentation clear? Can a peer who has also taken Deep Learning understand all of the points addressed above? Is sufficient detail provided?</h3>
+            <br><br>
+            <!-- Results -->
+            <h2>Experiments and Results</h2>
+            <h4>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h4>
+            TODO
+
+            <br><br>
+
+            <!-- Main Results Figure -->
+            <div style="text-align: center;">
+            <img style="height: 300px;" alt="" src="images/results.png">
+            </div>
+            <br><br>
+    </div>
+
+    <div class="footer">
+        <hr>
+        <footer>
+          <p>© Alex Cabrera, Varun Gupta, Will Epperson </p>
+        </footer>
+    </div>
 
 
-<h3>(10 points) Finally, points will be distributed based on your understanding of how your project relates to Deep Learning. Here are some questions to think about:</h3>
-<p>
-What was the structure of your problem? How did the structure of your model reflect the structure of your problem?
-What parts of your model had learned parameters (e.g., convolution layers) and what parts did not (e.g., post-processing classifier probabilities into decisions)?
-What representations of input and output did the neural network expect? How was the data pre/post-processed?
-What was the loss function?
-Did the model overfit? How well did the approach generalize?
-What hyperparameters did the model have? How were they chosen? How did they affect performance? What optimizer was used?
-What Deep Learning framework did you use?
-What existing code or models did you start with and what did those starting points provide?
-</p>
+</div>
+
+</body>
+</html>
