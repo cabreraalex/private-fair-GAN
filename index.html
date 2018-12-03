@@ -57,15 +57,16 @@
             <h2>Approach</h2>
             <h4>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h4>
 
+            We reproduced the Generative Adversarial Privacy and Fairness (GAPF)
+             mechanism outlined in the paper. The mechanism is a generative adversarial
+             neural network in which the generator attempts to learn a representation
+             of the data from which the adversary is not able to discern the sensitive attribute.
+             The sensitive attribute for the HAR dataset used is a binary gender variable.
+             The approach in the paper is novel because the GAPF framework learns a representation
+             that is agnostic of the downstream predictive task. That is, learning the
+             representation does not depend on
 
-            differences include:
 
-            <ul>
-                <li>learning fairness Representations that are agnostic of downstream learning task </li>
-                <li> inject noise where necessary rather than generating completley new synthetic data </li>
-
-
-            </ul>
 
             <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
             TODO
@@ -74,7 +75,8 @@
             <!-- Results -->
             <h2>Experiments and Results</h2>
             <h4>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h4>
-            TODO
+
+            We focused our evaluation on two areas: 1) the utility of the learned representation 
 
             <br><br>
 
