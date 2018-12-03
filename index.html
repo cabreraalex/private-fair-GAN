@@ -20,17 +20,27 @@
 
         <!-- Title and Name -->
         <h1>Reproducability Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
-        <span style="font-size: 20px; line-height: 1.5em;"><strong>Alex Cabrera, Varun Gupta, Will Epperson</strong></span><br>
+        <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel Cabrera, Varun Gupta, Will Epperson</strong></span><br>
         <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Class Project</span><br>
         <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
     </div>
 
     <div class="body">
             <!-- Goal -->
-            <h2>Abstract</h2>
+            <h2>Introduction/Background/Motivation</h2>
 
-            In our project, we attempted to reproduct the work of a paper on OpenReview.net entitled <a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">"Generative Adversarial Models for Learning Private and Fair Representations"</a>. This paper explores using a GAN architecture to create a decorrelation mechanism that hides a sensative variable while still preserving the utility of the original data. In our work, we attempted to replicate the architectures described in the paper through PyTorch with mixed results. It is our opinion that the results in this paper <mark><b>(blah blah blah)</b></mark>.
-            <br><br>
+            <h4>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon</h4>
+            <p>In our project, we attempted to reproduce the work of a paper on OpenReview.net entitled <i><a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">Generative Adversarial Models for Learning Private and Fair Representations</a></i>. This paper explores using a GAN architecture to create a decorrelation mechanism that hides a sensative variable while still preserving the utility of the original data. In our work, we replicated the architecture described in the paper using PyTorch. We focused on reproducing the results for the UCI Human Activity Recognition (HAR) dataset.</p>
+            <br>
+
+            <h4>How is it done today, and what are the limits of current practice?</h4>
+            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches <b>TODO: Cite or talk about previous decorrelation strats</b>. In regards to this specific paper is under review on OpenReview.com for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
+            <br>
+
+            <h4>Who cares? If you are successful, what difference will it make?</h4>
+            <p>There is a growing conversation around issues in machine learning regarding privacy and fairness. Models can easily encode bias and treat different groups disparately, while outputs of some models can give away the identity of certain instances. By creating a robust decorrelation mechanism that preserves the usefullness of a dataset, we can help improve these issues by allowing new innovations and techniques.</p>
+            <br>
+
             <!-- figure -->
             <h2>TODO: Teaser figure</h2>
             A figure that conveys the main idea behind the project or the main application being addressed. (This one is from <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks">AlexNet</a>.)
