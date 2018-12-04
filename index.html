@@ -61,6 +61,7 @@
                     The objective was to investigate the reproducibility of the
                     results of
                     the paper to confirm the validity of their approach.
+                    Our code can be found <a href="https://colab.research.google.com/drive/190liU6A7cg6W_Jjy_xp-B5Q78J--q-UG">here</a>.
                 </p>
 
                 <br>
@@ -294,9 +295,9 @@
                     trained much faster than the generator, and using one minibatch at a time did not lead to good convergence.
                     </p>
                     <p>
-                    Our modified training technique uses an alternating training approach. We first train the generator for 
+                    Our modified training technique uses an alternating training approach. We first train the generator for
                     i epochs on random minibatches, then train the adversary for j epochs on random minibatches. We run this alternating
-                    game for a total of T iterations. The parameters we used are as follows: 
+                    game for a total of T iterations. The parameters we used are as follows:
                     </p>
                     <table>
                         <tr>
@@ -325,11 +326,11 @@
                         </tr>
                     </table>
                 <p>
-                    The final detail for training is how the losses are defined for each model. 
+                    The final detail for training is how the losses are defined for each model.
                     The adversary uses a simple cross-entropy loss for classification when training.
                     For the generator, we use the negative loss of the adversary added to a distortion loss.
                     The distortion loss measures how noisy the decorrelated output is, and controls the balance
-                    between noise and decorrelation. We define this loss as the L2 distance between the original 
+                    between noise and decorrelation. We define this loss as the L2 distance between the original
                     data and the decorrelated data, weighted by a distortion weight. This loss is then set to the
                     maximum of 0 and the l2 distance minus the distortion parameter D.
                 </p>
