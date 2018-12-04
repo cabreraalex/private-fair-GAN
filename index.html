@@ -29,11 +29,16 @@
             <!-- Goal -->
             <h2>Introduction/Background/Motivation</h2>
 
-            <h4>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon</h4>
+            <h4>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</h4>
             <p>In our project, we attempted to reproduce the work of a paper on OpenReview.net entitled <i><a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">Generative Adversarial Models for Learning Private and Fair Representations</a></i>,
               which is currently under double-blind review for ICLR19.
               This paper explores using a generative adversarial architecture to create a decorrelation mechanism that obfuscates a sensitive variable while still preserving the utility of the original data.
-              In our work, we replicated the architecture described in the paper and focus on reproducing the results for the <a href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones" target="_blank">UCI Human Activity Recognition (HAR) dataset.</a></p>
+              In our work, we replicated the architecture described in the paper
+              and focus on reproducing the results for the
+              <a href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones" target="_blank">UCI Human Activity Recognition (HAR) dataset.</a>
+              The objective was to investigate the reproducibility of the results of
+              the paper to support the validity of the paper.
+            </p>
             <br>
 
             <h4>How is it done today, and what are the limits of current practice?</h4>
@@ -65,8 +70,8 @@
                   has also become increasingly important to machine learning
                   communities. We are helping in this endeavor by recreating the
                   results from this paper. Active engagement by students is one
-                  of the best ways to push academics and research to publish datasets
-                  and code and prioritize making their published work reproducible.
+                  of the best ways to push academics and researchers to publish datasets
+                  and code and prioritize reproducibility and reliability in their published work.
                 </p>
             <br>
 
@@ -207,10 +212,12 @@
 
             <div class="vis">
                 <figure>
+                    <img style="height: 300px;" alt="" src="images/accuracy_distortion.png">
                     <img style="height: 300px;" alt="" src="images/distortion_rate_tradeoff.png">
                     <figcaption>Test</figcaption>
                 </figure>
             </div>
+
 
             <h5>Discussion</h5>
             about similarity of our results to the paper's
