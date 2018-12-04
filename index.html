@@ -143,7 +143,7 @@
                     making
                     it harder to learn the sensitive data. This work builds on
                     recent developments
-                    in generative models which have been demonstrated to be
+                    in generative models which have demonstrated to be
                     effective in
                     this task.
                     The main difference in this paper is that the decorrelating
@@ -155,7 +155,8 @@
                     utility with respect to a particular task. Creating a robust
                     decorrelation mechanism that is independent of a particular
                     learning
-                    task would be a very useful for this field.</p>
+                    task would be very useful for this field.</p>
+
                 <p>In terms of our work, reproducibility of academic studies
                     has also become increasingly important to machine learning
                     communities. We are helping in this endeavor by recreating
@@ -163,7 +164,7 @@
                     results from this paper. Active engagement by students is
                     one
                     of the best ways to push academics and researchers to
-                    publish datasets
+                    release datasets
                     and code and prioritize reproducibility and reliability in
                     their published work.
                 </p>
@@ -377,8 +378,24 @@
                     </figure>
                 </div>
 
-                <p class="todo">Describe the graphs and what our results show</p>
-
+                <p>
+                  The first chart demonstrates that as the distortion level increases,
+                  the adversary's ability to predict the identity of the subject decreases
+                  while the classifiers ability to learn the target variable remains
+                  relatively stable. This indicates that the generator is sufficiently
+                  obfuscating the sensitive variable while still maintaining utility
+                  of the dataset. This is what we expect to happen under the GAPF framework.
+                </p>
+                <p>
+                  The second chart visualizes the data in a slightly different manner,
+                  emphasizing the rate of degradation for each classification for
+                  different distortion values. We can see that the adversary's classification
+                  accuracy degrades much quicker than the activity classifciation
+                  accuracy. Further, we see that for higher distortion values
+                  the generator is able to learn a representation that hides
+                  the sensitive attribute fairly well while only sacrificing minimal
+                  activity classification accuracy.
+                </p>
 
                 <h5>Discussion</h5>
                 <p class="todo">Talk about similarity to paper, overall success</p>
