@@ -1,9 +1,21 @@
 body {
-padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+
 .vis {
-color: #3366CC;
+    text-align: center;
 }
+
 .data {
-color: #FF9900;
+    color: #FF9900;
+}
+
+img {
+    display: inline-flex;
+    text-align: center;
+}
+
+figcaption { 
+    padding: 10px;
+    font-style: italic;
 }

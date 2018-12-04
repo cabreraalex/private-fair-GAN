@@ -20,7 +20,7 @@
 
         <!-- Title and Name -->
         <h1>ICLR Reproducibility Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
-        <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel Cabrera, Varun Gupta, Will Epperson</strong></span><br>
+        <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel Alexander Cabrera, Varun Gupta, Will Epperson</strong></span><br>
         <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Final Project</span><br>
         <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
     </div>
@@ -75,9 +75,12 @@
             Framework for the decorrelation mechanism. See appendix of paper
             for additional information.
             <br><br>
-            <div style="text-align: center;">
             <!-- Main Illustrative Figure -->
-            <img style="height: 200px;" alt="" src="images/gapf.png">
+            <div class="vis">
+                <figure>
+                    <img style="height: 200px;" alt="" src="images/gapf.png">
+                    <figcaption>Test</figcaption>
+                </figure>
             </div>
 
             <br>
@@ -128,10 +131,19 @@
              was captured by a parameter set in the model and the regularizer only penalized
              values that had an L2 norm exceeding this value.</p>
 
-             <h5>Our Implementation</h5>
+            <h5>Our Implementation</h5>
+            <div class="vis">
+                <figure>
+                    <img style="height: 200px;" alt="" src="images/model_gen.png">
+                    <img style="height: 200px;" alt="" src="images/model_adv.png">
+                    <img style="height: 200px;" alt="" src="images/model_class.png">
+                    <figcaption>Test</figcaption>
+                </figure>
+            </div>
              <p>We use the same model architecture as the paper, described above. However,
              we did implement the model ourselves and used PyTorch, whereas the original paper
              used TensorFlow.</p>
+
 
 
              <ui>
@@ -168,8 +180,12 @@
             and sensitive variables. We ran experiments for distortion values
             D ranging between 0 and 7.</p>
 
-            <div style="text-align: center;">
-            <img style="height: 300px;" alt="" src="images/adversary_loss_d3.png">
+            <div class="vis">
+                <figure>
+                    <img style="height: 300px;" alt="" src="images/adversary_loss_d3.png">
+                    <img style="height: 300px;" alt="" src="images/generator_loss_d3.png">
+                    <figcaption>Test</figcaption>
+                </figure>
             </div>
 
             <h5>Results</h5>
@@ -189,11 +205,12 @@
             Finally, we also show the tradeoff between classification accuracy of
             target and sensitive variables for different values of distortion.</p>
 
-            <!-- Main Results Figure -->
-            <div style="text-align: center;">
-            <img style="height: 300px;" alt="" src="images/results.png">
+            <div class="vis">
+                <figure>
+                    <img style="height: 300px;" alt="" src="images/distortion_rate_tradeoff.png">
+                    <figcaption>Test</figcaption>
+                </figure>
             </div>
-            <br>
 
             <h5>Discussion</h5>
             about similarity of our results to the paper's
@@ -204,7 +221,7 @@
     <div class="footer">
         <hr>
         <footer>
-          <p>© Alex Cabrera, Varun Gupta, Will Epperson </p>
+          <p>© Angel Alexander Cabrera, Varun Gupta, Will Epperson </p>
           <br>
         </footer>
     </div>
