@@ -42,7 +42,10 @@
             <br>
 
             <h4>How is it done today, and what are the limits of current practice?</h4>
-            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches <b>TODO: Cite or talk about previous decorrelation strats</b>. In regards to this specific paper, since it is under double-blind review for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
+            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches. Previous works such as those by Abadi & Andersen in 2016, Edwards & Storkey in 2015, Raval et al. in 2017, and Tripathy et al. in 2017 have commonly used methods such auto-encoders in order to remove sensitive data. This paper in turn uses a generative GAN model to generate obfuscated data by selectivley inserting noise where necessary. Futhermore, this approach focuses on privacy gurantees as a pre-processing task that is model and goal agnostic whereas other works have focused on modifying learning algorithms in real time as they learn or generate decorrelated data specific optimized for one learning task (such as in Dwork et al., 2012, Fish et al., 2016, Zhang et al., 2018). By subjecting the amount of obfuscation of the data to a Distrotion constraint, the authors hope to preserve dataset utility while still decorrelating sensitive attributes.
+            </p>
+            <mark> Is this ^ enough Background on distoriton?¿</mark>
+            <p>In regards to this specific paper, since it is under double-blind review for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
             <br>
 
             <h4>Who cares? If you are successful, what difference will it make?</h4>
