@@ -15,7 +15,7 @@ img {
     text-align: center;
 }
 
-figcaption { 
+figcaption {
     padding: 10px;
     font-style: italic;
 }
@@ -24,4 +24,8 @@ figcaption {
     background: red;
     color:white;
     padding: 3px;
+}
+
+p {
+    font-size: 15px !important;
 }
