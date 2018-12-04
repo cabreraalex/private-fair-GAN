@@ -74,8 +74,7 @@
                     problem that has various different approaches. Previous
                     works such as those by Abadi & Andersen in
                     2016, Edwards & Storkey in 2015, Raval et al. in 2017, and
-                    Tripathy et al. in 2017 <span class="todo">Should we have a
-                        references section and make this legit?</span>have
+                    Tripathy et al. in 2017 have
                     commonly used
                     methods such as auto-encoders in order to obfuscate
                     sensitive
@@ -178,10 +177,7 @@
                     <figure>
                         <img style="height: 200px;" alt=""
                             src="images/gapf.png">
-                        <figcaption>Framework for the decorrelation mechanism.
-                            See appendix of paper
-                            for additional information.<span class="todo">Add
-                                citation, say it's from paper</span></figcaption>
+                        <figcaption>Framework for the decorrelation mechanism from the <a href="https://openreview.net/forum?id=H1xAH2RqK7"> original paper</a>. See appendix of paper for more information. </figcaption>
                     </figure>
                 </div>
 
@@ -290,11 +286,58 @@
                     </figure>
                 </div>
                 <h5>Training</h5>
-                <p class="todo">Describe how we trained it, iterations we tried, maybe overfitting/hyperparameters</p>
+                    <p>
+                    Since the paper did not make clear the hyperparameters or training strategy used, we experimented
+                    with various techniques. The theoretical algorithm is described in section C as an alternating minimax
+                    algorithm. We first tried the exact strategy they use: (1) Randomly sample a minibatch
+                    (2) Train the adversary for j epochs on the minibatch (3) Take a gradient ascent step for the generator. We found that the adversary
+                    trained much faster than the generator, and using one minibatch at a time did not lead to good convergence.
+                    </p>
+                    <p>
+                    Our modified training technique uses an alternating training approach. We first train the generator for 
+                    i epochs on random minibatches, then train the adversary for j epochs on random minibatches. We run this alternating
+                    game for a total of T iterations. The parameters we used are as follows: 
+                    </p>
+                    <table>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Generator Epochs</td>
+                            <td class="right">5</td>
+                        </tr>
+                        <tr>
+                            <td>Adversary Epochs</td>
+                            <td class="right">1</td>
+                        </tr>
+                        <tr>
+                            <td>Total Iterations</td>
+                            <td class="right">50</td>
+                        </tr>
+                        <tr>
+                            <td>Distortion Weight</td>
+                            <td class="right">0.1</td>
+                        </tr>
+                        <tr>
+                            <td>Distortion</td>
+                            <td class="right">0, 1, 3, 5, 7</td>
+                        </tr>
+                    </table>
+                <p>
+                    The final detail for training is how the losses are defined for each model. 
+                    The adversary uses a simple cross-entropy loss for classification when training.
+                    For the generator, we use the negative loss of the adversary added to a distortion loss.
+                    The distortion loss measures how noisy the decorrelated output is, and controls the balance
+                    between noise and decorrelation. We define this loss as the L2 distance between the original 
+                    data and the decorrelated data, weighted by a distortion weight. This loss is then set to the
+                    maximum of 0 and the l2 distance minus the distortion parameter D.
+                </p>
                 <br>
                 <h4>What problems did you anticipate? What problems did you
                     encounter? Did the very first thing you tried
                     work?</h4>
+                <p>
                 Although the original code from the paper is not provided, the
                 paper
                 clearly states the outline of the implementation. We were able
@@ -308,6 +351,7 @@
                 values for these hyperparameters but discrepancy in these values
                 may
                 cause our results to differ slightly from the paper.
+                </p>
 
                 <br>
                 <!-- Results -->
@@ -393,7 +437,7 @@
                   The second chart visualizes the data in a slightly different manner,
                   emphasizing the rate of degradation for each classification for
                   different distortion values. We can see that the adversary's classification
-                  accuracy degrades much quicker than the activity classifciation
+                  accuracy degrades much quicker than the activity classification
                   accuracy. Further, we see that for higher distortion values
                   the generator is able to learn a representation that hides
                   the sensitive attribute fairly well while only sacrificing minimal
@@ -446,6 +490,21 @@
                 We plan to complete this prior to submitting our final entry
                 for the ICLR Reproducibility Challenge.
               </p>
+                <br>
+
+                <h5 id="References">References</h5>
+                <ol>
+                    <li> Anonymous. Generative  adversarial  models  for  learning  private  and  fair  representations. Submitted  to  International  Conference  on  Learning  Representations,  2019. URL: <a href="https://openreview.net/forum?id=H1xAH2RqK7"> https://openreview.net/forum?id=H1xAH2RqK7</a> . Under Review.</li>
+                    <li> Martín Abadi and David G Andersen. Learning to protect communications with adversarial neural cryptography. arXiv preprint arXiv:1610.06918, 2016. </li>
+                    <li> Harrison Edwards and Amos Storkey. Censoring representations with an adversary. arXiv preprint arXiv:1511.05897, 2015. </li>
+                    <li>Nisarg Raval, Ashwin Machanavajjhala, and Landon P Cox. Protecting visual secrets using adver- sarial nets. In CVPR Workshop Proceedings, 2017. </li>
+                    <li> Ardhendu Tripathy, Ye Wang, and Prakash Ishwar. Privacy-preserving adversarial networks. arXiv preprint arXiv:1712.07008, 2017.</li>
+                    <li> Cynthia Dwork, Moritz Hardt, Toniann Pitassi, Omer Reingold, and Richard Zemel. Fairness through awareness. In Proceedings of the 3rd innovations in theoretical computer science confer- ence, pp. 214–226. ACM, 2012.</li>
+                    <li> Benjamin Fish, Jeremy Kun, and Ádám D Lelkes. A confidence-based approach for balancing fairness and accuracy. In Proceedings of the 2016 SIAM International Conference on Data Mining, pp. 144–152. SIAM, 2016.</li>
+                    <li> Brian Hu Zhang, Blake Lemoine, and Margaret Mitchell. Mitigating unwanted biases with adver- sarial learning. arXiv preprint arXiv:1801.07593, 2018.</li>
+                </ol>
+
+
                 <br>
 
             </div>
