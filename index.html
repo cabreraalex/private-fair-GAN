@@ -445,7 +445,51 @@
                 </p>
 
                 <h5>Discussion</h5>
-                <p class="todo">Talk about similarity to paper, overall success</p>
+                <p>
+                  Our results are consistent with the findings of the paper. Our
+                  data indicate that the generator is able to learn a useful representation
+                  that only hides the sensitive data, as the paper claims. However,
+                  our specific results differ in the rate of accuracy loss. The paper's
+                  results show that both accuracies fall very quickly as distortion increases,
+                  while our generator seems to require a larger margin of distortion
+                  to obfuscate the data to the same level. For example, the original paper
+                  reports that for a distortion of 5, the identity classification accuracy
+                  is less than 10% and the activity classification accuracy is just under
+                  90%. On the other hand, we see values around 30% and 92% for identity
+                  and classification accuracy, respectively, for the same level
+                  of distortion. This could mean that our generator is not as effective
+                  as the one used for the paper, possibly resulting from hyperparemeter
+                  settings. Additionally, our generative model was relatively unstable
+                  and dependent on the random initializations. This led to some
+                  counterintuitive results, such as the adversary's higher accuracy
+                  with a distortion of 0 compared to distortion of 1. The paper's results
+                  seem to indicate more stability, as the loss curves decrease more smoothly.
+                </p>
+                <br>
+
+                <h5>Further Work</h5>
+                <p>The paper evaluates their framework on two real-world datasets,
+                the MPLab GENKI Database, consisting of facial image data, and the
+                HAR dataset that we evaluate. While our results for the HAR dataset
+                are consistent with the paper's findings, it would be useful to also
+                evaluate the GENKI dataset in order to fully evaluate the reliability
+                of the results presented in the original paper.
+                We think it could also be useful to evaluate
+                the GAPF framework on new datasets, specifically one additional tabular
+                and one additional image dataset. It would be interesting to see
+                if the results genaralize well to these new datasets.
+              </p>
+              <p>
+                While this is outside the scope of evaluating reproducibility, we
+                are also interested in seeing how the GAPF framework compares to other
+                previously established decorrelation mechanisms. The paper does
+                not include results comparing their framework to other methods
+                to obfuscate the sensitive attribute.
+              <p>
+              <p>
+                We plan to complete this prior to submitting our final entry
+                for the ICLR Reproducibility Challenge.
+              </p>
                 <br>
 
                 <h5 id="References">References</h5>
