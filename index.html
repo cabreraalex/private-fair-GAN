@@ -1,243 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>Deep Learning Class Project | Georgia Tech | Fall 2018: CS 4803 / 7643</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <!-- Styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Deep Learning Class Project | Georgia Tech | Fall 2018: CS 4803 /
+            7643</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-<body>
-<div class="container">
-    <div class="page-header">
+        <!-- Styles -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    </head>
 
-        <!-- Title and Name -->
-        <h1>ICLR Reproducibility Challenge: Generative Adversarial Models For Learning Private And Fair Representations</h1>
-        <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel Alexander Cabrera, Varun Gupta, Will Epperson</strong></span><br>
-        <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS 4803 / 7643 Deep Learning: Final Project</span><br>
-        <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
-    </div>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <!-- Title and Name -->
+                <h1>ICLR Reproducibility Challenge: Generative Adversarial
+                    Models For Learning Private And Fair
+                    Representations</h1>
+                <span style="font-size: 20px; line-height: 1.5em;"><strong>Angel
+                        Alexander Cabrera, Varun Gupta, Will
+                        Epperson</strong></span><br>
+                <span style="font-size: 18px; line-height: 1.5em;">Fall 2018 CS
+                    4803 / 7643 Deep Learning: Final Project</span><br>
+                <span style="font-size: 18px; line-height: 1.5em;">Georgia Tech</span>
+            </div>
 
-    <div class="body">
-            <!-- Goal -->
-            <h2>Introduction/Background/Motivation</h2>
+            <div class="body">
+                <!-- Goal -->
+                <h2>Introduction/Background/Motivation</h2>
 
-            <h4>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</h4>
-            <p>In our project, we attempted to reproduce the work of a paper on OpenReview.net entitled <i><a href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE" target="_blank">Generative Adversarial Models for Learning Private and Fair Representations</a></i>,
-              which is currently under double-blind review for ICLR19.
-              This paper explores using a generative adversarial architecture to create a decorrelation mechanism that obfuscates a sensitive variable while still preserving the utility of the original data.
-              In our work, we replicated the architecture described in the paper
-              and focus on reproducing the results for the
-              <a href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones" target="_blank">UCI Human Activity Recognition (HAR) dataset.</a>
-              The objective was to investigate the reproducibility of the results of
-              the paper to support the validity of the paper.
-            </p>
-            <br>
-
-            <h4>How is it done today, and what are the limits of current practice?</h4>
-            <p>It is often desireable to decorrelate data from a protected feature to preserve the privacy of the data instances or ensure fairness between feature values. Learning a decorrelation mehcanism is a difficult problem that has various different approaches. Previous works such as those by Abadi & Andersen in 2016, Edwards & Storkey in 2015, Raval et al. in 2017, and Tripathy et al. in 2017 have commonly used methods such auto-encoders in order to remove sensitive data. This paper in turn uses a generative GAN model to generate obfuscated data by selectivley inserting noise where necessary. Futhermore, this approach focuses on privacy gurantees as a pre-processing task that is model and goal agnostic whereas other works have focused on modifying learning algorithms in real time as they learn or generate decorrelated data specific optimized for one learning task (such as in Dwork et al., 2012, Fish et al., 2016, Zhang et al., 2018). By subjecting the amount of obfuscation of the data to a Distrotion constraint, the authors hope to preserve dataset utility while still decorrelating sensitive attributes.
-            </p>
-            <mark> Is this ^ enough Background on distoriton?¿</mark>
-            <p>In regards to this specific paper, since it is under double-blind review for submission to ICML, the code is not currently open-source. In addition, as was articulated by some of the reviews, the architecture of the model is not very clearly described.</p>
-            <br>
-
-            <h4>Who cares? If you are successful, what difference will it make?</h4>
-            <p>There is a growing conversation in machine learning communities
-                regarding privacy and fairness. Statistical models can easily
-                encode bias and treat different groups disparately, either as a result
-                of the original data or as a result of imbalances in the learning process.
-                Additionally, some models may unintentially reveal sensitive data
-                potentially publicizing an individual's personal information. As described
-                in the paper, much recent work in this area has focused on context-free
-                privacy and fairness which has proven to be very effective. However,
-                these guarantees do not leverage the data to obscure the sensitive
-                data in a particularly speciific way, thus often leading to significant
-                accuracy tradeoffs. In contrast, context-aware solutions tend to
-                create representations of data that preserve utility while making
-                it harder to learn the sensitive data. This work builds on recent developments
-                in generative models which have demonstrated effective in this task.
-                The main difference in this paper is that the decorrelating mechanism introduced
-                does not depend on fixing a particular target variable or learning task.
-                Previous work has focused on learning representations of data that maintain
-                utility with respect to a particular task. Creating a robust
-                decorrelation mechanism that is independent of a particular learning
-                task would be a very useful for this field.</p>
-                <p>In terms of our work, reproducibility of academic studies
-                  has also become increasingly important to machine learning
-                  communities. We are helping in this endeavor by recreating the
-                  results from this paper. Active engagement by students is one
-                  of the best ways to push academics and researchers to publish datasets
-                  and code and prioritize reproducibility and reliability in their published work.
+                <h4>What did you try to do? What problem did you try to solve?
+                    Articulate your objectives using absolutely
+                    no jargon.</h4>
+                <p>In our project, we attempted to reproduce the work of a paper
+                    on OpenReview.net entitled <i><a
+                            href="https://openreview.net/forum?id=H1xAH2RqK7&fbclid=IwAR16FmCPpcFdWT0ZF3Qpg4x_bCVlbPMVe290sa4SQ6KrsHp8zmxG4aHU2PE"
+                            target="_blank">Generative Adversarial Models for
+                            Learning Private and Fair Representations</a></i>,
+                    which is currently under double-blind review for ICLR19.
+                    This paper explores using a generative adversarial
+                    architecture to create a decorrelation mechanism
+                    that obfuscates a sensitive variable while still preserving
+                    the utility of the original data. This mechanism can be used
+                    to
+                    ensure a dataset is private and fair for a protected feature
+                    while keeping the remaining data useful for learning tasks.
+                    In our work, we replicated the architecture described in the
+                    paper
+                    and reproduced the results for the
+                    <a
+                        href="https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones"
+                        target="_blank">UCI
+                        Human Activity Recognition (HAR) dataset.</a>
+                    The objective was to investigate the reproducibility of the
+                    results of
+                    the paper to confirm the validity of their approach.
                 </p>
-            <br>
 
-            <!-- figure -->
-            <h2>Generative Adversarial Privacy and Fairness (GAPF) Framework</h2>
-            Framework for the decorrelation mechanism. See appendix of paper
-            for additional information.
-            <br><br>
-            <!-- Main Illustrative Figure -->
-            <div class="vis">
-                <figure>
-                    <img style="height: 200px;" alt="" src="images/gapf.png">
-                    <figcaption>Test</figcaption>
-                </figure>
+                <br>
+
+                <h4>How is it done today, and what are the limits of current
+                    practice?</h4>
+                <p>It is often desireable to decorrelate data from a protected
+                    feature to preserve the privacy of the data
+                    instances or ensure fairness between feature values.
+                    Learning a decorrelation mehcanism is a difficult
+                    problem that has various different approaches. Previous
+                    works such as those by Abadi & Andersen in
+                    2016, Edwards & Storkey in 2015, Raval et al. in 2017, and
+                    Tripathy et al. in 2017 <span class="todo">Should we have a
+                        references section and make this legit?</span>have
+                    commonly used
+                    methods such as auto-encoders in order to obfuscate
+                    sensitive
+                    features. This paper takes a novel approach, using a
+                    generative
+                    adversarial network (GAN)
+                    model to generate obfuscated data by learning where to
+                    selectively
+                    insert noise where necessary. Futhermore, this
+                    approach focuses on privacy guarantees as a pre-processing
+                    task that is model and goal agnostic, whereas
+                    other works have focused on modifying learning algorithms in
+                    real time as they learn or generate
+                    decorrelated data specific optimized for one learning task
+                    (such as in Dwork et al., 2012, Fish et al.,
+                    2016, Zhang et al., 2018). By subjecting the amount of
+                    obfuscation of the data to a distrotion
+                    constraint, the authors hope to preserve dataset utility
+                    while still decorrelating sensitive
+                    attributes.
+                </p>
+                <p>We also hope to improve on the results provided by this
+                    specific paper.
+                    Since it is under
+                    double-blind review for submission to ICML'19, the
+                    code and model architecture is not currently open-source. In
+                    addition, as was
+                    articulated by some of the reviews, the
+                    architecture of the model is not very clearly described. By
+                    releasing
+                    our code and describing our process in detail, we hope to
+                    make
+                    the process and technique much clearer and more accessible.
+                </p>
+
+                <br>
+
+                <h4>Who cares? If you are successful, what difference will it
+                    make?</h4>
+                <p>There is a growing conversation in machine learning
+                    communities
+                    regarding privacy and fairness. Statistical models can
+                    easily
+                    encode bias and treat different groups disparately, either
+                    as a result
+                    of the original data or as a result of imbalances in the
+                    learning process.
+                    Additionally, some models may unintentionally reveal
+                    sensitive
+                    data,
+                    potentially making an individual's personal
+                    information vulnerable. As described
+                    in the paper, much recent work in this area has focused on
+                    context-free
+                    privacy and fairness, which has proven to be very effective.
+                    However,
+                    these guarantees do not leverage the data to obscure
+                    sensitive
+                    features in a particularly specific way, thus often leading
+                    to
+                    significant
+                    accuracy tradeoffs. In contrast, context-aware solutions
+                    tend to
+                    create representations of data that preserve utility while
+                    making
+                    it harder to learn the sensitive data. This work builds on
+                    recent developments
+                    in generative models which have been demonstrated to be
+                    effective in
+                    this task.
+                    The main difference in this paper is that the decorrelating
+                    mechanism introduced
+                    does not depend on fixing a particular target variable or
+                    learning task.
+                    Previous work has focused on learning representations of
+                    data that maintain
+                    utility with respect to a particular task. Creating a robust
+                    decorrelation mechanism that is independent of a particular
+                    learning
+                    task would be a very useful for this field.</p>
+                <p>In terms of our work, reproducibility of academic studies
+                    has also become increasingly important to machine learning
+                    communities. We are helping in this endeavor by recreating
+                    the
+                    results from this paper. Active engagement by students is
+                    one
+                    of the best ways to push academics and researchers to
+                    publish datasets
+                    and code and prioritize reproducibility and reliability in
+                    their published work.
+                </p>
+                <br>
+
+                <!-- figure -->
+                <hr>
+                <h2>Approach</h2>
+                <!-- Main Illustrative Figure -->
+                <div class="vis">
+                    <figure>
+                        <img style="height: 200px;" alt=""
+                            src="images/gapf.png">
+                        <figcaption>Framework for the decorrelation mechanism.
+                            See appendix of paper
+                            for additional information.<span class="todo">Add
+                                citation, say it's from paper</span></figcaption>
+                    </figure>
+                </div>
+
+                <!-- Approach -->
+                <br>
+                <h4>What did you do exactly? How did you solve the problem? Why
+                    did you think it would be successful? Is
+                    anything new in your approach?</h4>
+
+                <h5>Overview of Generative Adversarial Privacy and Fairness
+                    (GAPF) Framework</h5>
+
+                <p>We reproduced the Generative Adversarial Privacy and Fairness
+                    (GAPF)
+                    mechanism outlined in the paper. The mechanism is a
+                    generative adversarial
+                    neural network in which the generator attempts to learn a
+                    representation
+                    of the data from which the adversary is not able to discern
+                    the sensitive attribute.
+                    The sensitive attribute for the HAR dataset used is the
+                    attribute representing
+                    the subject's identity.
+                    The approach in the paper is novel because the GAPF
+                    framework learns a representation
+                    that is agnostic of the downstream predictive task. That is,
+                    the generator is able
+                    to learn a representation of the data that is useful for any
+                    number of
+                    tasks one might want to use the data for. This is a key
+                    difference between
+                    the GAPF framework and previously introduced decorrelating
+                    mechanisms.</p>
+
+                <h5>HAR Dataset</h5>
+                <p>The HAR dataset used consists of smartphone motion sensor
+                    data with 561
+                    features collected from 30 subjects. The target variable
+                    represents
+                    one of six activities (walking, walking up stairs, walking
+                    down stairs,
+                    sitting, standing, laying) that each subject is performing.
+                    The motion sensor
+                    features represent the public variables and the subject's
+                    identity represents
+                    the sensitive variable.</p>
+
+                <h5>Implementation of the Model</h5>
+                <p>We use the same model architecture as the paper as described
+                    below. However,
+                    we implemented the model ourselves and used PyTorch,
+                    whereas the original paper
+                    used TensorFlow.</p>
+                <p>The decorrelator is modeled using a four-layer fully
+                    connected feedforward
+                    neural network. The decorrleator expects an input of
+                    661 features, which is the original data concatenated with
+                    100 features of Gaussian noise.
+                    The network's three hidden layers consist of 512 neurons
+                    with leaky ReLU activations and batch norm for
+                    regularization.
+                    The output layer has 561 neurons, used to generate processed
+                    data
+                    with the same dimensionality as the original.</p>
+                <p>
+                    The adversary is a five-layer feedforward neural network.
+                    The adversary expects an
+                    input of 561 features, the dimensionality of the original
+                    data. The four hidden
+                    layers have 512, 512, 265, and 128 neurons, respectively,
+                    each with leaky
+                    ReLU activations and batch norm. The output layer has 30
+                    neurons which
+                    output the adversary's
+                    belief of the subject's identity.
+                </p>
+                <p>
+                    Lastly, we implemented an activity classifier to validate
+                    that the decorrelated
+                    data is still usable in a generic learning task. It is the
+                    same architecture as the adversary except for the
+                    final layer that is only six neurons.
+                </p>
+                <p>
+                    We used cross-entropy loss for the adversary prediction and
+                    an an L2 regularizer
+                    to measure distortion of the decorrelation. The
+                    regularizer was
+                    used to impose the distortion constraint on the generator to
+                    limit the
+                    amount the processed data could differ from the original.
+                    The distortion
+                    was captured by a parameter set in the model and the
+                    regularizer only penalized
+                    values that had an L2 norm exceeding this value.</p>
+
+                <div class="vis">
+                    <figure>
+                        <img style="height: 200px;" alt=""
+                            src="images/model_gen.png">
+                        <img style="height: 200px;" alt=""
+                            src="images/model_adv.png">
+                        <img style="height: 200px;" alt=""
+                            src="images/model_class.png">
+                        <figcaption>Our three PyTorch Models</figcaption>
+                    </figure>
+                </div>
+                <h5>Training</h5>
+                <p class="todo">Describe how we trained it, iterations we tried, maybe overfitting/hyperparameters</p>
+                <br>
+                <h4>What problems did you anticipate? What problems did you
+                    encounter? Did the very first thing you tried
+                    work?</h4>
+                Although the original code from the paper is not provided, the
+                paper
+                clearly states the outline of the implementation. We were able
+                to
+                implement their formulation relatively easily. One issue we
+                faced was
+                the order in which to train each network.
+                Further, the paper did not identify their hyperparameter
+                settings,
+                such as the regularization weight. We experimentally chose
+                values for these hyperparameters but discrepancy in these values
+                may
+                cause our results to differ slightly from the paper.
+
+                <br>
+                <!-- Results -->
+                <hr>
+                <h2>Experiments and Results</h2>
+                <h4>How did you measure success? What experiments were used?
+                    What were the results, both quantitative and
+                    qualitative? Did you succeed? Did you fail? Why?</h4>
+
+                <h5>Experiments</h5>
+                <p>We ran multiple experiments with different values for the
+                    distortion parameter.
+                    As described above, the distortion parameter captures how
+                    much the learned
+                    representation is allowed to differ from the original data.
+                    Higher distortion
+                    values mean that the generator is able to modify the data
+                    more, which
+                    we expect would lead to lower classification accuracy for
+                    both the target
+                    and sensitive variables. We ran experiments for distortion
+                    values
+                    D ranging between 0 and 7.</p>
+
+                <div class="vis">
+                    <figure>
+                        <img style="height: 300px;" alt=""
+                            src="images/adversary_loss_d3.png">
+                        <img style="height: 300px;" alt=""
+                            src="images/generator_loss_d3.png">
+                        <figcaption>Training curves for GAPF training</figcaption>
+                    </figure>
+                </div>
+
+                <h5>Results</h5>
+
+                <p>We focused our evaluation on two areas: 1) the utility of the
+                    learned representation
+                    and 2) the obfuscation of the sensitive variable.
+                </p>
+                <p>
+                    To measure the utility of the learned representation we
+                    compared the predictive power of a neural
+                    network
+                    in classifying the activity attribute on the original data
+                    and the
+                    learned representation. The classifier used was a neural
+                    network with
+                    the same architecture as the adversary described above.
+                </p>
+                <p>
+                    To measure the generator's effectiveness in obscuring the
+                    sensitive
+                    variable, we compared the adversary's activity prediction
+                    accuracy between the
+                    original and processed data.
+
+                </p> <p>
+                    Finally, we also show the tradeoff between classification
+                    accuracy of
+                    target and sensitive variables for different values of
+                    distortion.</p>
+
+                <div class="vis">
+                    <figure>
+                        <img style="height: 300px;" alt=""
+                            src="images/accuracy_distortion.png">
+                        <img style="height: 300px;" alt=""
+                            src="images/distortion_rate_tradeoff.png">
+                        <figcaption>Activity classification and adversary accuracy for different distortion levels</figcaption>
+                    </figure>
+                </div>
+
+                <p class="todo">Describe the graphs and what our results show</p>
+
+
+                <h5>Discussion</h5>
+                <p class="todo">Talk about similarity to paper, overall success</p>
+                <br>
+
             </div>
 
-            <br>
-
-            <!-- Approach -->
-            <h2>Approach</h2>
-            <h4>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</h4>
-
-            <h5>Overview of Model</h5>
-
-            <p>We reproduced the Generative Adversarial Privacy and Fairness (GAPF)
-             mechanism outlined in the paper. The mechanism is a generative adversarial
-             neural network in which the generator attempts to learn a representation
-             of the data from which the adversary is not able to discern the sensitive attribute.
-             The sensitive attribute for the HAR dataset used is the attribute representing
-             the subject's identity.
-             The approach in the paper is novel because the GAPF framework learns a representation
-             that is agnostic of the downstream predictive task. That is, the generator is able
-             to learn a representation of the data that is useful for any number of
-             tasks one might want to use the data for. This is a key difference between
-             the GAPF framework and previously introduced decorrelating mechanisms.</p>
-
-             <h5>HAR Dataset</h5>
-             <p>The HAR dataset used consists of smartphone motion sensor data with 561
-             features collected from 30 subjects. The target variable represents
-             one of six activities (walking, walking up stairs, walking down stairs,
-             sitting, standing, laying) that each subject is performing. The motion sensor
-             features represent the public variables and the subject's identity represents
-             the sensitive variable.</p>
-
-             <h5>Architecture</h5>
-             <p>The decorrelator is modeled using a four-layer fully connected feedforward
-             neural network. The decorrleator expects an input of
-             661 features, which is the original data concatenated with 100 features of Gaussian noise.
-             The network's three hidden layers consist of 512 neurons with leaky ReLU activations.
-             The output layer has 561 neurons, used to generate processed data
-             with the same dimensionality as the original.
-
-             The adversary is a five-layer feedforward neural network. The adversary expects an
-             input of 561 features, the dimensionality of the original data. The four hidden
-             layer have 512, 512, 265, and 128 neurons, respectively, each with leaky
-             ReLU activations. The output layer has 30 layers which output the adversary's
-             belief of the subject's identity.
-
-             We used cross-entropy loss with an L2 regularizer. The regularizer was
-             used to impose the distortion constraint on the generator to limit the
-             amount the processed data could differ from the orignial. The distortion
-             was captured by a parameter set in the model and the regularizer only penalized
-             values that had an L2 norm exceeding this value.</p>
-
-            <h5>Our Implementation</h5>
-            <div class="vis">
-                <figure>
-                    <img style="height: 200px;" alt="" src="images/model_gen.png">
-                    <img style="height: 200px;" alt="" src="images/model_adv.png">
-                    <img style="height: 200px;" alt="" src="images/model_class.png">
-                    <figcaption>Test</figcaption>
-                </figure>
-            </div>
-             <p>We use the same model architecture as the paper, described above. However,
-             we did implement the model ourselves and used PyTorch, whereas the original paper
-             used TensorFlow.</p>
-
-
-
-             <ui>
-               <li>
-                 hyperparameters
-               </li>
-               <li>
-                 overfitting
-               </li>
-            </ui>
-
-
-            <h4>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</h4>
-            Although the original code from the paper is not provided, the paper
-            clearly states the outline of the implementation. We were able to
-            implement their formulation relatively easily. One issue we faced was
-            the order in which to train each network. TODO
-            Further, the paper did not identify their hyperparameter settings,
-            such as the regularization weight. We experimentally chose
-            values for these hyperparameters but discrepancy in these values may
-            cause our results to differ slightly from the paper.
-
-            <br><br>
-            <!-- Results -->
-            <h2>Experiments and Results</h2>
-            <h4>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</h4>
-
-            <h5>Experiments</h5>
-            <p>We ran multiple experiments with different values for the distortion parameter.
-            As described above, the distortion parameter captures how much the learned
-            representation is allowed to differ from the original data. Higher distortion
-            values mean that the generator is able to modify the data more, which
-            we expect would lead to lower classification accuracy for both the target
-            and sensitive variables. We ran experiments for distortion values
-            D ranging between 0 and 7.</p>
-
-            <div class="vis">
-                <figure>
-                    <img style="height: 300px;" alt="" src="images/adversary_loss_d3.png">
-                    <img style="height: 300px;" alt="" src="images/generator_loss_d3.png">
-                    <figcaption>Test</figcaption>
-                </figure>
-            </div>
-
-            <h5>Results</h5>
-
-            <p>We focused our evaluation on two areas: 1) the utility of the learned representation
-            and 2) the obfuscation of the sensitive variable.
-
-            To measure the utility of the learned representation we compared the predictive power of a neural network
-            in classifying the activity attribute on the original data and the
-            learned representation. The classifier used was a neural network with
-            the same architecture as the adversary described above.
-
-            To measure the generator's effectiveness in obscuring the sensitive
-            variable, we compared the adversary's gender prediction accuracy between the
-            original and processed data.
-
-            Finally, we also show the tradeoff between classification accuracy of
-            target and sensitive variables for different values of distortion.</p>
-
-            <div class="vis">
-                <figure>
-                    <img style="height: 300px;" alt="" src="images/accuracy_distortion.png">
-                    <img style="height: 300px;" alt="" src="images/distortion_rate_tradeoff.png">
-                    <figcaption>Test</figcaption>
-                </figure>
+            <div class="footer">
+                <hr>
+                <footer>
+                    <p>© Angel Alexander Cabrera, Varun Gupta, Will Epperson
+                    </p>
+                    <br>
+                </footer>
             </div>
 
 
-            <h5>Discussion</h5>
-            about similarity of our results to the paper's
-            <br>
+        </div>
 
-    </div>
+    </body>
 
-    <div class="footer">
-        <hr>
-        <footer>
-          <p>© Angel Alexander Cabrera, Varun Gupta, Will Epperson </p>
-          <br>
-        </footer>
-    </div>
-
-
-</div>
-
-</body>
 </html>
