@@ -1,2 +1,4 @@
 report/*
 !report/*.tex
+
+.vscode
