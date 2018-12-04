@@ -25,3 +25,20 @@ figcaption {
     color:white;
     padding: 3px;
 }
+
+table {
+    margin: 20px auto;
+}
+
+.right {
+    text-align: right;
+}
+
+td {
+    padding: 10px;
+}
+
+th {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
