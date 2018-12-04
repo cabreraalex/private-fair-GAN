@@ -15,7 +15,7 @@ img {
     text-align: center;
 }
 
-figcaption { 
+figcaption {
     padding: 10px;
     font-style: italic;
 }
@@ -41,4 +41,8 @@ td {
 th {
     padding-bottom: 5px;
     border-bottom: 1px solid black;
+}
+
+p {
+    font-size: 15px !important;
 }
